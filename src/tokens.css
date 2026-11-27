@@ -1,13 +1,13 @@
 /*
  * tokens.css: design tokens from the Figma file "COAST", for shadcn/ui + Tailwind v4
- * Źródło: kolekcje "Primitives" i "Theme", stan na 26.11.2026.
+ * Source: the "Primitives" and "Theme" variable collections, as of 26.11.2026.
  *
- * Struktura odpowiada Figmie:
- *   1. @theme static  → Primitives (kolory) – surowa paleta, daje też klasy typu bg-navy-900
- *   2. :root          → Primitives (pozostałe) + Theme (role shadcn jako aliasy do prymitywów)
- *   3. @theme inline  → mapowanie ról na klasy Tailwinda (bg-primary, border-ring, …)
+ * Structure mirrors Figma:
+ *   1. @theme static  → Primitives (colors): the raw palette, also gives classes like bg-navy-900
+ *   2. :root          → Primitives (other values) + Theme (shadcn roles aliasing the primitives)
+ *   3. @theme inline  → maps the roles to Tailwind classes (bg-primary, border-ring, …)
  *
- * Nazwy zmiennych = "code syntax" zmiennych w Figmie (Dev Mode pokazuje te same nazwy).
+ * Variable names = the "code syntax" of the Figma variables (Dev Mode shows the same names).
  */
 
 /* ── 1. Primitives: kolory ─────────────────────────────────────────────── */
@@ -33,12 +33,12 @@
 
   --color-red-600: #dc2626;
   --color-red-600-a60: #dc262699;
-  --color-red-700: #db0000; /* uwaga: nadpisuje domyślny red-700 Tailwinda (#b91c1c) */
+  --color-red-700: #db0000; /* note: overrides Tailwind's default red-700 (#b91c1c) */
 }
 
 :root {
-  /* ── 2a. Primitives: pozostałe wartości ──────────────────────────────── */
-  /* W Figmie krycie jest w procentach (50, 80…), w CSS musi być ułamkiem */
+  /* ── 2a. Primitives: other values ────────────────────────────────────── */
+  /* Figma stores opacity as percentages (50, 80…); CSS needs fractions */
   --opacity-50: 0.5;
   --opacity-80: 0.8;
   --opacity-90: 0.9;
@@ -60,7 +60,7 @@
   --font-size-14: 0.875rem;  /* 14px */
   --line-height-20: 1.25rem; /* 20px */
 
-  /* ── 2b. Theme: role shadcn (tryb Light) ─────────────────────────────── */
+  /* ── 2b. Theme: shadcn roles (Light mode) ────────────────────────────── */
   --radius: var(--radius-2);
 
   --background: var(--color-white);
@@ -113,7 +113,7 @@
   --color-warning-foreground: var(--warning-foreground);
   --color-warning-ring: var(--warning-ring);
 
-  /* Projekt używa jednego promienia (2px), więc rounded-sm/md/lg dają to samo */
+  /* The design uses a single radius (2px), so rounded-sm/md/lg are the same */
   --radius-sm: var(--radius);
   --radius-md: var(--radius);
   --radius-lg: var(--radius);
