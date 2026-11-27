@@ -1,6 +1,6 @@
 # COAST UI
 
-Design system components for COAST, built with [shadcn/ui](https://ui.shadcn.com) and Tailwind CSS v4. They're coded from the Figma file **Camera Store – Option B**.
+Design system components for COAST, built with [shadcn/ui](https://ui.shadcn.com) and Tailwind CSS v4. They're coded from the Figma file **COAST**.
 
 The design tokens and the code use the same names. A designer working in Figma and a developer working in code see identical values (`--primary`, `--ring`, `--success`, …).
 
