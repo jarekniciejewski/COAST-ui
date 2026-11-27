@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+/* COAST design tokens exported from Figma (Primitives + Theme). Edit values there first. */
+@import "./tokens.css";
+
+/*
+ * Remaining shadcn/ui roles that COAST has no Figma token for yet.
+ * Other shadcn components (Card, Dialog, Input, …) rely on them.
+ * Once they're designed in Figma, move them into tokens.css.
+ */
+:root {
+  --card: var(--background);
+  --card-foreground: var(--foreground);
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+  --secondary: var(--color-zinc-100);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--color-zinc-100);
+  --muted-foreground: oklch(0.552 0.016 285.938); /* zinc-500 */
+  --accent-foreground: var(--foreground);
+  --input: var(--color-zinc-400);
+}
+
+@theme inline {
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-input: var(--input);
+}
+
+@theme {
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}

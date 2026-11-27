@@ -1,5 +1,5 @@
 /**
- * Button: coded from the Figma component "Button" (Camera Store – Option B, node 17:229).
+ * Button: coded from the Figma component "Button" (Figma file "COAST", node 17:229).
  * Replaces the default shadcn/ui button at src/components/ui/button.tsx.
  * Needs tokens.css (imported in index.css) for the colors, radius and font.
  *

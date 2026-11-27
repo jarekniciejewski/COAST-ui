@@ -1,16 +1,40 @@
 # COAST UI
 
-Design system components for COAST, built with [shadcn/ui](https://ui.shadcn.com) and Tailwind CSS v4. They're coded from the Figma file **COAST**.
+Design system components for COAST, built with [shadcn/ui](https://ui.shadcn.com), React and Tailwind CSS v4. They're coded from the Figma file **COAST**.
+
+**Live demo:** https://jarekniciejewski.github.io/COAST-ui/
 
 The design tokens and the code use the same names. A designer working in Figma and a developer working in code see identical values (`--primary`, `--ring`, `--success`, …).
 
-## Contents
+## Run it locally
 
-| File | What it is |
+You need [Node.js](https://nodejs.org) 20 or newer.
+
+```bash
+git clone https://github.com/jarekniciejewski/COAST-ui.git
+cd COAST-ui
+npm install
+npm run dev
+```
+
+Open the address it prints (usually http://localhost:5173). Edits to the code show up in the browser right away.
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Starts the local showcase page with live reload |
+| `npm run build` | Checks the types and builds the site into `dist/` |
+| `npm run preview` | Serves the built `dist/` folder locally |
+
+## What's where
+
+| Path | What it is |
 |---|---|
 | `src/tokens.css` | Design tokens exported from Figma: the **Primitives** collection (raw palette, spacing, radius, type) and the **Theme** collection (shadcn roles such as `primary`, `border`, `ring`) |
+| `src/index.css` | Imports Tailwind and the tokens, and adds the shadcn roles that aren't in Figma yet |
 | `src/components/ui/button.tsx` | The Button component |
-| `docs/index.html` | Interactive preview of the Button: every variant, live states, and a Figma-to-code map. Open it in a browser. |
+| `src/App.tsx` | The showcase page you see at the live demo |
+| `components.json` | shadcn/ui settings, so `npx shadcn@latest add …` puts new components in the right place |
+| `.github/workflows/deploy.yml` | Builds the project on every push to `main` and publishes it to GitHub Pages |
 
 ## Components
 
@@ -35,22 +59,11 @@ import { Plus } from "lucide-react"
 
 The browser handles the hover, pressed and focus states (`state=hover`, `active` and `focus` in Figma) on its own.
 
-## Using it in a project
+## Using the components in another project
 
-1. **Create a shadcn project** (skip this if you already have one):
-   ```bash
-   npx shadcn@latest init -t vite
-   ```
-2. **Add the tokens.** Copy `src/tokens.css` into your project's `src/` folder. In `src/index.css`, add this line right below `@import "tailwindcss";`:
-   ```css
-   @import "./tokens.css";
-   ```
-   Then remove these variables from the `:root` block in `index.css`, because `tokens.css` defines them now: `--background`, `--foreground`, `--primary`, `--primary-foreground`, `--accent`, `--border`, `--ring`, `--destructive`, `--radius`.
-3. **Add the Button.** Install shadcn's button (this also installs `class-variance-authority`), then replace the generated file with the one from this repo:
-   ```bash
-   npx shadcn@latest add button
-   ```
-   Copy `src/components/ui/button.tsx` over `src/components/ui/button.tsx`.
+1. Set up shadcn/ui there (`npx shadcn@latest init -t vite` for a new Vite project).
+2. Copy `src/tokens.css` into its `src/` folder and add `@import "./tokens.css";` right below `@import "tailwindcss";` in its `index.css`. Then remove from its `:root` block the variables `tokens.css` now defines: `--background`, `--foreground`, `--primary`, `--primary-foreground`, `--accent`, `--border`, `--ring`, `--destructive`, `--radius`.
+3. Run `npx shadcn@latest add button`, then replace the generated `src/components/ui/button.tsx` with the one from this repo.
 
 ## Notes
 
