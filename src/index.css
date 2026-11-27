@@ -15,10 +15,7 @@
   --popover-foreground: var(--foreground);
   --secondary: var(--color-zinc-100);
   --secondary-foreground: var(--foreground);
-  --muted: var(--color-zinc-100);
-  --muted-foreground: oklch(0.552 0.016 285.938); /* zinc-500 */
   --accent-foreground: var(--foreground);
-  --input: var(--color-zinc-400);
 }
 
 @theme inline {
@@ -28,10 +25,7 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
   --color-accent-foreground: var(--accent-foreground);
-  --color-input: var(--input);
 }
 
 @theme {

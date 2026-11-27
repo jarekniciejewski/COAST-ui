@@ -1,6 +1,6 @@
 /*
  * tokens.css: design tokens from the Figma file "COAST", for shadcn/ui + Tailwind v4
- * Source: the "Primitives" and "Theme" variable collections, as of 26.11.2026.
+ * Source: the "Primitives" and "Theme" variable collections, as of 27.11.2026.
  *
  * Structure mirrors Figma:
  *   1. @theme static  → Primitives (colors): the raw palette, also gives classes like bg-navy-900
@@ -10,7 +10,7 @@
  * Variable names = the "code syntax" of the Figma variables (Dev Mode shows the same names).
  */
 
-/* ── 1. Primitives: kolory ─────────────────────────────────────────────── */
+/* ── 1. Primitives: colors ─────────────────────────────────────────────── */
 @theme static {
   --color-white: #ffffff;
 
@@ -34,6 +34,14 @@
   --color-red-600: #dc2626;
   --color-red-600-a60: #dc262699;
   --color-red-700: #db0000; /* note: overrides Tailwind's default red-700 (#b91c1c) */
+
+  --color-ink-50: #f3f5f7;
+  --color-ink-700: #39424c;
+  --color-ink-950: #0a1a2a;
+
+  --color-sand-300: #c4bbba;
+
+  --color-black-a5: #0000000d;
 }
 
 :root {
@@ -44,6 +52,7 @@
   --opacity-90: 0.9;
   --opacity-100: 1;
 
+  --space-4: 4px;
   --space-6: 6px;
   --space-8: 8px;
   --space-10: 10px;
@@ -55,9 +64,12 @@
   --ring-width-3: 3px;
 
   --font-family-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-weight-regular: 400; /* Figma: "Regular" */
   --font-weight-medium: 500; /* Figma: "Medium" */
   --font-weight-bold: 700;   /* Figma: "Bold" */
+  --font-size-12: 0.75rem;   /* 12px */
   --font-size-14: 0.875rem;  /* 14px */
+  --line-height-16: 1rem;    /* 16px */
   --line-height-20: 1.25rem; /* 20px */
 
   /* ── 2b. Theme: shadcn roles (Light mode) ────────────────────────────── */
@@ -65,6 +77,13 @@
 
   --background: var(--color-white);
   --foreground: var(--color-navy-900);
+
+  /* Form fields (Input) */
+  --field-foreground: var(--color-ink-950);
+  --input: var(--color-sand-300);
+  --muted: var(--color-ink-50);
+  --muted-foreground: var(--color-ink-700);
+  --shadow-xs: var(--color-black-a5);
 
   --primary: var(--color-navy-900);
   --primary-foreground: var(--color-white);
@@ -91,10 +110,15 @@
   --warning-ring: var(--color-amber-600-a60);
 }
 
-/* ── 3. Role → klasy Tailwinda ─────────────────────────────────────────── */
+/* ── 3. Roles → Tailwind classes ───────────────────────────────────────── */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-field-foreground: var(--field-foreground);
+  --color-input: var(--input);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-shadow-xs: var(--shadow-xs);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-accent: var(--accent);
