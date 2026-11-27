@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}</style>
+<title>Camera Store Button</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<!-- Component tokens: identical to tokens.css -->
+<style type="text/tailwindcss">
+@theme static {
+  --color-white: #ffffff;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-100-a10: #f4f4f51a;
+  --color-zinc-100-a20: #f4f4f533;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-400-a50: #a1a1aa80;
+  --color-navy-600: #0f68a2;
+  --color-navy-900: #002a51;
+  --color-sky-600: #0284c7;
+  --color-green-600: #16a34a;
+  --color-green-600-a60: #16a34a99;
+  --color-green-800: #166534;
+  --color-amber-600: #d97706;
+  --color-amber-600-a60: #d9770699;
+  --color-red-600: #dc2626;
+  --color-red-600-a60: #dc262699;
+  --color-red-700: #db0000;
+}
+:root {
+  --radius-2: 2px;
+  --font-family-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --radius: var(--radius-2);
+  --background: var(--color-white);
+  --foreground: var(--color-navy-900);
+  --primary: var(--color-navy-900);
+  --primary-foreground: var(--color-white);
+  --accent: var(--color-zinc-100-a20);
+  --accent-subtle: var(--color-zinc-100-a10);
+  --border: var(--color-navy-900);
+  --border-hover: var(--color-navy-600);
+  --ring: var(--color-navy-600);
+  --ring-shadow: var(--color-zinc-400-a50);
+  --destructive: var(--color-red-700);
+  --destructive-foreground: var(--color-white);
+  --destructive-ring: var(--color-red-600-a60);
+  --success: var(--color-green-800);
+  --success-foreground: var(--color-white);
+  --success-ring: var(--color-green-600-a60);
+  --warning: var(--color-amber-600);
+  --warning-foreground: var(--color-white);
+  --warning-ring: var(--color-amber-600-a60);
+}
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-ring: var(--ring);
+  --color-ring-shadow: var(--ring-shadow);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-ring: var(--destructive-ring);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-ring: var(--success-ring);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-ring: var(--warning-ring);
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --font-sans: var(--font-family-sans);
+}
+</style>
+
+<!-- Page styles (the preview around the component) -->
+<style>
+/* Layout: one reading column; component stages are white "canvas" panels like the Figma page */
+:root {
+  --pg-bg: #f3f5f8;
+  --pg-surface: #ffffff;
+  --pg-fg: #0c1a29;
+  --pg-muted: #586374;
+  --pg-line: #dbe0e7;
+  --pg-accent: #002a51;
+  --pg-code-bg: #eceff4;
+  --pg-stage: #ffffff;
+  --pg-stage-fg: #586374;
+  --pg-stage-line: #e3e7ed;
+  --pg-chip-on: #002a51;
+  --pg-chip-on-fg: #ffffff;
+  --pg-font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pg-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pg-bg: #0d131a; --pg-surface: #141c25; --pg-fg: #e5eaf0; --pg-muted: #98a3b2;
+    --pg-line: #263241; --pg-accent: #8db9e4; --pg-code-bg: #1a2430;
+    --pg-stage: #ffffff; --pg-stage-fg: #586374; --pg-stage-line: #e3e7ed;
+    --pg-chip-on: #8db9e4; --pg-chip-on-fg: #0d131a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --pg-bg: #0d131a; --pg-surface: #141c25; --pg-fg: #e5eaf0; --pg-muted: #98a3b2;
+  --pg-line: #263241; --pg-accent: #8db9e4; --pg-code-bg: #1a2430;
+  --pg-stage: #ffffff; --pg-stage-fg: #586374; --pg-stage-line: #e3e7ed;
+  --pg-chip-on: #8db9e4; --pg-chip-on-fg: #0d131a;
+  color-scheme: dark;
+}
+
+body { background: var(--pg-bg); color: var(--pg-fg); }
+.pg-body {
+  background: var(--pg-bg);
+  color: var(--pg-fg);
+  font-family: var(--pg-font);
+  font-size: 15px;
+  line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 64px;
+}
+.pg-wrap { max-width: 980px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px; }
+
+.pg-head { display: flex; flex-direction: column; gap: 10px; }
+.pg-eyebrow { font-family: var(--pg-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--pg-muted); }
+.pg-h1 { font-size: 34px; line-height: 1.15; font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+.pg-lede { max-width: 64ch; color: var(--pg-muted); margin: 0; }
+.pg-meta { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: var(--pg-muted); }
+.pg-meta b { color: var(--pg-fg); font-weight: 600; }
+
+.pg-section { display: flex; flex-direction: column; gap: 16px; }
+.pg-h2 { font-size: 20px; font-weight: 650; letter-spacing: -0.01em; margin: 0; }
+.pg-note { font-size: 14px; color: var(--pg-muted); margin: 0; max-width: 70ch; }
+
+/* Playground */
+.pg-play { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 0; border: 1px solid var(--pg-line); border-radius: 10px; overflow: hidden; background: var(--pg-surface); }
+.pg-controls { display: flex; flex-direction: column; gap: 18px; padding: 20px; border-right: 1px solid var(--pg-line); }
+.pg-field { display: flex; flex-direction: column; gap: 8px; border: 0; padding: 0; margin: 0; min-width: 0; }
+.pg-label { font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--pg-muted); padding: 0; }
+.pg-seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.pg-seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.pg-seg label { font-family: var(--pg-mono); font-size: 13px; padding: 5px 10px; border: 1px solid var(--pg-line); border-radius: 6px; cursor: pointer; color: var(--pg-fg); background: transparent; user-select: none; }
+.pg-seg input:checked + label { background: var(--pg-chip-on); color: var(--pg-chip-on-fg); border-color: var(--pg-chip-on); }
+.pg-seg input:focus-visible + label { outline: 2px solid var(--pg-accent); outline-offset: 2px; }
+.pg-checks { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 14px; }
+.pg-checks label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.pg-checks input { accent-color: var(--pg-accent); width: 16px; height: 16px; }
+.pg-text { font: inherit; font-size: 14px; padding: 7px 10px; border: 1px solid var(--pg-line); border-radius: 6px; background: var(--pg-bg); color: var(--pg-fg); width: 100%; box-sizing: border-box; }
+.pg-text:focus-visible { outline: 2px solid var(--pg-accent); outline-offset: 1px; }
+
+.pg-output { display: flex; flex-direction: column; min-width: 0; }
+.pg-stage { flex: 1; min-height: 220px; display: grid; place-items: center; background: var(--pg-stage); background-image: radial-gradient(var(--pg-stage-line) 1px, transparent 1px); background-size: 16px 16px; padding: 32px 16px; }
+.pg-hint { font-size: 12px; color: var(--pg-stage-fg); text-align: center; margin-top: 14px; }
+.pg-code { position: relative; border-top: 1px solid var(--pg-line); background: var(--pg-code-bg); }
+.pg-code pre { margin: 0; padding: 16px 92px 16px 16px; overflow-x: auto; font-family: var(--pg-mono); font-size: 13px; line-height: 1.6; color: var(--pg-fg); white-space: pre; }
+.pg-copy { position: absolute; top: 10px; right: 10px; font: 500 12px var(--pg-font); padding: 6px 10px; border-radius: 6px; border: 1px solid var(--pg-line); background: var(--pg-surface); color: var(--pg-fg); cursor: pointer; }
+.pg-copy:focus-visible { outline: 2px solid var(--pg-accent); outline-offset: 2px; }
+
+/* Matrix */
+.pg-scroll { overflow-x: auto; border: 1px solid var(--pg-line); border-radius: 10px; background: var(--pg-stage); }
+.pg-matrix { border-collapse: collapse; width: 100%; min-width: 620px; }
+.pg-matrix th, .pg-matrix td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--pg-stage-line); }
+.pg-matrix thead th { font-family: var(--pg-mono); font-size: 11px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: var(--pg-stage-fg); background: #f7f8fa; }
+.pg-matrix tbody th { font-family: var(--pg-mono); font-size: 12px; font-weight: 400; color: var(--pg-stage-fg); white-space: nowrap; }
+.pg-matrix tbody tr:last-child th, .pg-matrix tbody tr:last-child td { border-bottom: 0; }
+.pg-matrix tr.pg-group th, .pg-matrix tr.pg-group td { border-top: 1px solid #cfd5de; }
+
+/* Mapping + hand-off */
+.pg-table-wrap { overflow-x: auto; border: 1px solid var(--pg-line); border-radius: 10px; background: var(--pg-surface); }
+.pg-map { border-collapse: collapse; width: 100%; font-size: 14px; }
+.pg-map th, .pg-map td { padding: 10px 14px; border-bottom: 1px solid var(--pg-line); text-align: left; vertical-align: top; }
+.pg-map th { font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--pg-muted); }
+.pg-map tr:last-child td { border-bottom: 0; }
+.pg-map code, .pg-steps code { font-family: var(--pg-mono); font-size: 12.5px; background: var(--pg-code-bg); padding: 1px 5px; border-radius: 4px; }
+
+.pg-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; list-style: none; padding: 0; margin: 0; counter-reset: step; }
+.pg-steps li { counter-increment: step; background: var(--pg-surface); border: 1px solid var(--pg-line); border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; min-width: 0; }
+.pg-steps li::before { content: "Step " counter(step); font-family: var(--pg-mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; color: var(--pg-muted); }
+.pg-steps strong { font-weight: 600; }
+.pg-steps p { margin: 0; color: var(--pg-muted); }
+
+@media (max-width: 760px) {
+  .pg-play { grid-template-columns: minmax(0, 1fr); }
+  .pg-controls { border-right: 0; border-bottom: 1px solid var(--pg-line); }
+  .pg-steps { grid-template-columns: minmax(0, 1fr); }
+  .pg-h1 { font-size: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
+
+<div class="pg-body">
+<div class="pg-wrap">
+
+  <header class="pg-head">
+    <div class="pg-eyebrow">Design system · Component 01</div>
+    <h1 class="pg-h1">Button</h1>
+    <p class="pg-lede">The coded version of the Button from your Figma file. Every button on this page is a working component: point at it, press it, or move to it with the Tab key to see the hover, pressed and focus states from Figma.</p>
+    <div class="pg-meta">
+      <span><b>3</b> styles</span>
+      <span><b>4</b> tones</span>
+      <span><b>2</b> sizes</span>
+      <span><b>5</b> states</span>
+      <span>Source: Camera Store – Option B, component set “Button”</span>
+    </div>
+  </header>
+
+  <section class="pg-section" aria-labelledby="play-h">
+    <h2 class="pg-h2" id="play-h">Try it</h2>
+    <div class="pg-play">
+      <form class="pg-controls" id="controls" autocomplete="off">
+        <fieldset class="pg-field">
+          <legend class="pg-label">Style</legend>
+          <div class="pg-seg" id="seg-variant"></div>
+        </fieldset>
+        <fieldset class="pg-field">
+          <legend class="pg-label">Tone</legend>
+          <div class="pg-seg" id="seg-tone"></div>
+        </fieldset>
+        <fieldset class="pg-field">
+          <legend class="pg-label">Size</legend>
+          <div class="pg-seg" id="seg-size"></div>
+        </fieldset>
+        <div class="pg-field">
+          <label class="pg-label" for="opt-label">Label</label>
+          <input class="pg-text" id="opt-label" type="text" value="Add to cart" maxlength="40">
+        </div>
+        <fieldset class="pg-field">
+          <legend class="pg-label">Options</legend>
+          <div class="pg-checks">
+            <label><input type="checkbox" id="opt-left" checked> Left icon</label>
+            <label><input type="checkbox" id="opt-right"> Right icon</label>
+            <label><input type="checkbox" id="opt-disabled"> Disabled</label>
+          </div>
+        </fieldset>
+      </form>
+      <div class="pg-output">
+        <div class="pg-stage">
+          <div>
+            <div id="live"></div>
+            <p class="pg-hint">Hover, press, or Tab to it</p>
+          </div>
+        </div>
+        <div class="pg-code">
+          <pre id="snippet"></pre>
+          <button class="pg-copy" id="copy" type="button">Copy</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pg-section" aria-labelledby="all-h">
+    <h2 class="pg-h2" id="all-h">All variants</h2>
+    <p class="pg-note">The same grid as the Figma component set, light theme. Hover, pressed and focus are live states here, not separate frames.</p>
+    <div class="pg-scroll">
+      <table class="pg-matrix" id="matrix">
+        <thead><tr><th scope="col">style · tone</th><th scope="col">sm</th><th scope="col">lg</th><th scope="col">sm · disabled</th><th scope="col">lg · disabled</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="pg-section" aria-labelledby="map-h">
+    <h2 class="pg-h2" id="map-h">From Figma to code</h2>
+    <div class="pg-table-wrap">
+      <table class="pg-map">
+        <thead><tr><th>In Figma</th><th>In code</th></tr></thead>
+        <tbody>
+          <tr><td>style = primary, secondary, tertiary</td><td><code>variant="primary"</code> · <code>"secondary"</code> · <code>"tertiary"</code></td></tr>
+          <tr><td>style suffix _success, _warning, _error / _destructive</td><td><code>tone="success"</code> · <code>"warning"</code> · <code>"destructive"</code> (no suffix = <code>"default"</code>)</td></tr>
+          <tr><td>size = sm, lg</td><td><code>size="sm"</code> (32 px) · <code>size="lg"</code> (40 px)</td></tr>
+          <tr><td>state = hover, active, focus</td><td>Happens on its own when someone points at, presses or tabs to the button</td></tr>
+          <tr><td>state = disable</td><td><code>disabled</code></td></tr>
+          <tr><td>Left Icon / Right Icon + icon swap</td><td><code>leftIcon={&lt;Plus /&gt;}</code> · <code>rightIcon={&lt;ChevronRight /&gt;}</code></td></tr>
+          <tr><td>label</td><td>The text between <code>&lt;Button&gt;</code> and <code>&lt;/Button&gt;</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="pg-section" aria-labelledby="hand-h">
+    <h2 class="pg-h2" id="hand-h">Hand-off to a developer</h2>
+    <p class="pg-note">Send them two files, <code>button.tsx</code> and <code>tokens.css</code>, together with the link to this page. Setup takes about ten minutes:</p>
+    <ol class="pg-steps">
+      <li><strong>Create the project</strong><p>Run <code>npx shadcn@latest init -t vite</code> (or use an existing shadcn project).</p></li>
+      <li><strong>Add the tokens</strong><p>Put <code>tokens.css</code> in <code>src/</code> and add <code>@import "./tokens.css";</code> to <code>index.css</code>.</p></li>
+      <li><strong>Add the Button</strong><p>Run <code>npx shadcn@latest add button</code>, then replace <code>src/components/ui/button.tsx</code> with the file from Figma.</p></li>
+    </ol>
+  </section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.4"></script>
+<script>
+// Same variant config as button.tsx
+const BASE = [
+  "inline-flex shrink-0 items-center justify-center whitespace-nowrap",
+  "rounded-md border",
+  "font-sans text-sm leading-5 font-medium active:font-bold",
+  "transition-[opacity,background-color,border-color,box-shadow] duration-150",
+  "outline-none focus-visible:ring-3 focus-visible:ring-ring-shadow focus-visible:opacity-90",
+  "active:opacity-100",
+  "disabled:pointer-events-none disabled:opacity-50",
+  "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+].join(" ");
+const VARIANTS = {
+  variant: {
+    primary: "border-transparent hover:opacity-90",
+    secondary: "text-foreground hover:opacity-80 hover:bg-accent active:bg-accent focus-visible:bg-accent-subtle",
+    tertiary: "border-transparent text-foreground hover:opacity-80 active:bg-accent focus-visible:bg-accent-subtle",
+  },
+  tone: { default: "", success: "", warning: "", destructive: "" },
+  size: { sm: "h-8 gap-1.5 px-[11px]", lg: "h-10 gap-2 px-[23px]" },
+};
+const COMPOUND = [
+  { variant: "primary", tone: "default", class: "bg-primary text-primary-foreground focus-visible:border-ring" },
+  { variant: "primary", tone: "success", class: "bg-success text-success-foreground focus-visible:border-success-ring" },
+  { variant: "primary", tone: "warning", class: "bg-warning text-warning-foreground focus-visible:border-warning-ring" },
+  { variant: "primary", tone: "destructive", class: "bg-destructive text-destructive-foreground focus-visible:border-destructive-ring" },
+  { variant: "secondary", tone: "default", class: "border-border hover:border-border-hover active:border-border focus-visible:border-ring" },
+  { variant: "secondary", tone: "success", class: "border-success" },
+  { variant: "secondary", tone: "warning", class: "border-warning" },
+  { variant: "secondary", tone: "destructive", class: "border-destructive" },
+  { variant: "tertiary", tone: "default", class: "hover:border-border-hover active:border-border focus-visible:border-ring" },
+  { variant: "tertiary", tone: "success", class: "hover:border-success active:border-success focus-visible:border-success" },
+  { variant: "tertiary", tone: "warning", class: "hover:border-warning active:border-warning focus-visible:border-warning" },
+  { variant: "tertiary", tone: "destructive", class: "hover:border-destructive active:border-destructive focus-visible:border-destructive" },
+];
+const DEFAULTS = { variant: "primary", tone: "default", size: "sm" };
+
+function buttonVariants(props) {
+  const p = Object.assign({}, DEFAULTS, props);
+  const out = [BASE];
+  for (const k of Object.keys(VARIANTS)) out.push(VARIANTS[k][p[k]]);
+  for (const cv of COMPOUND) {
+    if (Object.keys(cv).every(k => k === "class" || p[k] === cv[k])) out.push(cv.class);
+  }
+  return out.filter(Boolean).join(" ");
+}
+
+const ICONS = {
+  plus: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>',
+  chevron: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>',
+};
+
+function makeButton(opts) {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = buttonVariants(opts);
+  if (opts.disabled) b.disabled = true;
+  if (opts.left) b.insertAdjacentHTML("beforeend", ICONS.plus);
+  const span = document.createElement("span");
+  span.textContent = opts.label || "Button";
+  b.appendChild(span);
+  if (opts.right) b.insertAdjacentHTML("beforeend", ICONS.chevron);
+  return b;
+}
+
+// Playground
+const state = { variant: "primary", tone: "default", size: "lg" };
+function seg(id, key, values) {
+  const host = document.getElementById(id);
+  values.forEach(v => {
+    const input = document.createElement("input");
+    input.type = "radio"; input.name = key; input.id = key + "-" + v; input.value = v;
+    input.checked = state[key] === v;
+    const label = document.createElement("label");
+    label.htmlFor = input.id; label.textContent = v;
+    input.addEventListener("change", () => { state[key] = v; renderLive(); });
+    host.append(input, label);
+  });
+}
+seg("seg-variant", "variant", ["primary", "secondary", "tertiary"]);
+seg("seg-tone", "tone", ["default", "success", "warning", "destructive"]);
+seg("seg-size", "size", ["sm", "lg"]);
+
+const el = id => document.getElementById(id);
+["opt-label", "opt-left", "opt-right", "opt-disabled"].forEach(id => el(id).addEventListener("input", renderLive));
+el("controls").addEventListener("submit", e => e.preventDefault());
+
+function esc(s) { return s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+
+function renderLive() {
+  const opts = { ...state, label: el("opt-label").value || "Button", left: el("opt-left").checked, right: el("opt-right").checked, disabled: el("opt-disabled").checked };
+  const live = el("live");
+  live.replaceChildren(makeButton(opts));
+  const attrs = [];
+  if (state.variant !== "primary") attrs.push(`variant="${state.variant}"`);
+  if (state.tone !== "default") attrs.push(`tone="${state.tone}"`);
+  if (state.size !== "sm") attrs.push(`size="${state.size}"`);
+  if (opts.left) attrs.push("leftIcon={<Plus />}");
+  if (opts.right) attrs.push("rightIcon={<ChevronRight />}");
+  if (opts.disabled) attrs.push("disabled");
+  el("snippet").textContent = `<Button${attrs.length ? " " + attrs.join(" ") : ""}>${opts.label}</Button>`;
+}
+renderLive();
+
+el("copy").addEventListener("click", () => {
+  const text = el("snippet").textContent;
+  const done = () => { el("copy").textContent = "Copied"; setTimeout(() => el("copy").textContent = "Copy", 1500); };
+  const fallback = () => { const r = document.createRange(); r.selectNodeContents(el("snippet")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); el("copy").textContent = "Press Ctrl+C"; };
+  try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+});
+
+// Matrix
+const tbody = document.querySelector("#matrix tbody");
+["primary", "secondary", "tertiary"].forEach((variant, vi) => {
+  ["default", "success", "warning", "destructive"].forEach((tone, ti) => {
+    const tr = document.createElement("tr");
+    if (vi > 0 && ti === 0) tr.className = "pg-group";
+    const th = document.createElement("th");
+    th.scope = "row"; th.textContent = `${variant} · ${tone}`;
+    tr.appendChild(th);
+    [["sm", false], ["lg", false], ["sm", true], ["lg", true]].forEach(([size, disabled]) => {
+      const td = document.createElement("td");
+      td.appendChild(makeButton({ variant, tone, size, disabled }));
+      tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+});
+</script>
+
+</html>

@@ -1,0 +1,122 @@
+/*
+ * tokens.css: design tokens z Figmy (Camera Store – Option B), dla shadcn/ui + Tailwind v4
+ * Źródło: kolekcje "Primitives" i "Theme", stan na 26.11.2026.
+ *
+ * Struktura odpowiada Figmie:
+ *   1. @theme static  → Primitives (kolory) – surowa paleta, daje też klasy typu bg-navy-900
+ *   2. :root          → Primitives (pozostałe) + Theme (role shadcn jako aliasy do prymitywów)
+ *   3. @theme inline  → mapowanie ról na klasy Tailwinda (bg-primary, border-ring, …)
+ *
+ * Nazwy zmiennych = "code syntax" zmiennych w Figmie (Dev Mode pokazuje te same nazwy).
+ */
+
+/* ── 1. Primitives: kolory ─────────────────────────────────────────────── */
+@theme static {
+  --color-white: #ffffff;
+
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-100-a10: #f4f4f51a;
+  --color-zinc-100-a20: #f4f4f533;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-400-a50: #a1a1aa80;
+
+  --color-navy-600: #0f68a2;
+  --color-navy-900: #002a51;
+  --color-sky-600: #0284c7;
+
+  --color-green-600: #16a34a;
+  --color-green-600-a60: #16a34a99;
+  --color-green-800: #166534;
+
+  --color-amber-600: #d97706;
+  --color-amber-600-a60: #d9770699;
+
+  --color-red-600: #dc2626;
+  --color-red-600-a60: #dc262699;
+  --color-red-700: #db0000; /* uwaga: nadpisuje domyślny red-700 Tailwinda (#b91c1c) */
+}
+
+:root {
+  /* ── 2a. Primitives: pozostałe wartości ──────────────────────────────── */
+  /* W Figmie krycie jest w procentach (50, 80…), w CSS musi być ułamkiem */
+  --opacity-50: 0.5;
+  --opacity-80: 0.8;
+  --opacity-90: 0.9;
+  --opacity-100: 1;
+
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-24: 24px;
+
+  --radius-2: 2px;
+  --border-width-1: 1px;
+  --ring-width-3: 3px;
+
+  --font-family-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-weight-medium: 500; /* Figma: "Medium" */
+  --font-weight-bold: 700;   /* Figma: "Bold" */
+  --font-size-14: 0.875rem;  /* 14px */
+  --line-height-20: 1.25rem; /* 20px */
+
+  /* ── 2b. Theme: role shadcn (tryb Light) ─────────────────────────────── */
+  --radius: var(--radius-2);
+
+  --background: var(--color-white);
+  --foreground: var(--color-navy-900);
+
+  --primary: var(--color-navy-900);
+  --primary-foreground: var(--color-white);
+
+  --accent: var(--color-zinc-100-a20);
+  --accent-subtle: var(--color-zinc-100-a10);
+
+  --border: var(--color-navy-900);
+  --border-hover: var(--color-navy-600);
+
+  --ring: var(--color-navy-600);
+  --ring-shadow: var(--color-zinc-400-a50);
+
+  --destructive: var(--color-red-700);
+  --destructive-foreground: var(--color-white);
+  --destructive-ring: var(--color-red-600-a60);
+
+  --success: var(--color-green-800);
+  --success-foreground: var(--color-white);
+  --success-ring: var(--color-green-600-a60);
+
+  --warning: var(--color-amber-600);
+  --warning-foreground: var(--color-white);
+  --warning-ring: var(--color-amber-600-a60);
+}
+
+/* ── 3. Role → klasy Tailwinda ─────────────────────────────────────────── */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-ring: var(--ring);
+  --color-ring-shadow: var(--ring-shadow);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-ring: var(--destructive-ring);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-ring: var(--success-ring);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-ring: var(--warning-ring);
+
+  /* Projekt używa jednego promienia (2px), więc rounded-sm/md/lg dają to samo */
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+
+  --font-sans: var(--font-family-sans);
+}
